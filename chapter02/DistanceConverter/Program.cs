@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Metrics;
 using System.Xml.Serialization;
-
+//コマンドライン引数で指定された範囲のフィートとメートルの対応表を出力
 namespace DistanceConverter {
     internal class Program {
         static void Main(string[] args) {
@@ -16,9 +16,6 @@ namespace DistanceConverter {
             }
 
         }
-
-
-
         static void PrintfeetToMeterList(int start, int end) {
             for (int feet = start; feet <= end; feet++) {
                 //double meter = feet * 0.3048;
