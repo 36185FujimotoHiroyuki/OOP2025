@@ -15,7 +15,7 @@ namespace DistanceConverter {
                 PrintMeterToFeetList(start, end);
             }
 
-        }
+        }//フィートからメートルへの対応表を出力
         static void PrintfeetToMeterList(int start, int end) {
 
             FeetConverter Converter = new FeetConverter();
@@ -24,9 +24,9 @@ namespace DistanceConverter {
                 double meter = Converter.ToMeter(feet);
                 Console.WriteLine($"{feet}ft = {meter:0.0000}m");
             }
-        }
+        }//メートルからフィートへの対応表を出力
 
-        public void PrintmeterToMeterList(int start, int end) {
+        public void PrintMeterToFeetList(int start, int end) {
             FeetConverter Converter = new FeetConverter();
             for (int meter = start; meter <= end; meter++) {
 
