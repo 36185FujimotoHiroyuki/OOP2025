@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Exercise02
 {
-    public class Inch{
+    public class InchConverter{
       
             //定数
             private const double ratio = 0.3048;
-            //メートルからフィートを求める
+            //メートルからインチ
             public double FromMeter(double meter) {
 
             return meter / ratio;
 
-            } //フィートからメートルを求める
+            } //インチからメートルを求める
             public double ToMeter(double inch) {
                 return inch * ratio;
             }

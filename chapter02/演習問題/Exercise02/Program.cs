@@ -11,44 +11,49 @@
             for (int inch = 1; inch <= 10; inch++) {
                 double meters = inch * inchToMeter;
                 Console.WriteLine($"{inch} インチ = {meters:F4} メートル");
+
+
+
+
             }
         }
 
-        //訂正した
+        //訂正した(インチからメートルに変更）
 
-        //int start = int.Parse(args[1]);
-       // int end = int.Parse(args[2]);
+        //       PrintfeetToMeterList(1, 10);
+        //  }//インチからメートルへの対応表を出力
+        //  static void PrintInchToMeterList(int start, int end) {
+        // for (int inch = start; inch <= end; inch++) {
+        //  double meter = InchConverter.ToMeter(inch);
+        // Console.WriteLine($"{inch}ih = {meter:0.0000}m");
+        // }
+        
 
+       
 
-         //   if (args.Length >= 1 && args[0] == "-tom") {
-         //       PrintfeetToMeterList(start, end);
-    //} else {
-        //        PrintMeterToInchList(start, end);
-//}
-
-      //  }//インチからメートルへの対応表を出力
-      //  static void PrintInchToMeterList(int start, int end) {
-
-   // FeetConverter Converter = new InchConverter();
-   // for (int inch = start; inch <= end; inch++) {
-        //double meter = inch * 0.3048;
-      //  double meter = Converter.ToMeter(inch);
-       // Console.WriteLine($"{inch}ih = {meter:0.0000}m");
-   // }
-//}//メートルからインチへの対応表を出力
-
-//public void PrintMeterToInchList(int start, int end) {
- //   InchConverter Converter = new InchConverter();
- //   for (int meter = start; meter <= end; meter++) {
-
-   //     double feet = Converter.FromMeter(meter);
-   //     Console.WriteLine($"{meter}m = {feet:0.0000}ih");
-   // }
-
-
-
-
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 }
 
