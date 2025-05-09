@@ -2,7 +2,7 @@
     internal class Program {
         static void Main(string[] args) {
 
-            SalesCounter sales = new SalesCounter(ReadSales(@"data\sales.csv"));
+            SalesCounter sales = new SalesCounter(@"data\sales.csv");
             //変更後↓       
             // new Dictionary<string, int>();
             Dictionary<string, int> amountsPerstore = sales.GetPerStoreSales();//←変更前

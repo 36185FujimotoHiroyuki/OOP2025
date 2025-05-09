@@ -8,9 +8,9 @@ namespace SalesCalculator {//売り上げ集計クラス
     public class SalesCounter {
         private readonly List<Sale> _sales;
 
-        //コンストラクター
-        public SalesCounter(List<Sale> sales) {
-            _sales = sales;
+        //コンストラクタ
+        public SalesCounter(string filePath) {
+             _sales = ReadSales(filePath);
 
         }
         //店舗別売り上げを求める
