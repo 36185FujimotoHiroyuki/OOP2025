@@ -31,11 +31,11 @@ namespace SalesCalculator {//売り上げ集計クラス
                 //売り上げデータを読み込み、Saleオブジェクトのリストを返す
                 public IEnumerable<Sale> ReadSales(string filePath) {
             //売り上げデータを入れるリストオブジェクトを生成
-            List<Sale> sales = new List<Sale>();
+            var sales = new List<Sale>();
             //ファイルを一気に読み込む
             string[] lines = File.ReadAllLines(filePath);
             //読み込んだ行数分繰り返し
-            foreach (string line in lines) {
+            foreach (var line in lines) {
                 String[] items = line.Split(',');
                 //Saleオブジェクトを生成
                 Sale sale = new Sale() {

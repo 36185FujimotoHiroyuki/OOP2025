@@ -2,10 +2,10 @@
     internal class Program {
         static void Main(string[] args) {
 
-            SalesCounter sales = new SalesCounter(@"data\sales.csv");
+            var sales = new SalesCounter(@"data\sales.csv");
             //変更後↓       
             // new Dictionary<string, int>();
-            IDictionary<string, int> amountsPerstore = sales.GetPerStoreSales();//←変更前
+            var amountsPerstore = sales.GetPerStoreSales();//←変更前
            // amountsPerstore = sales.GetPerStoreSales();
             foreach (KeyValuePair<string, int> obj in amountsPerstore) {
                 Console.WriteLine($"{obj.Key} {obj.Value}");
