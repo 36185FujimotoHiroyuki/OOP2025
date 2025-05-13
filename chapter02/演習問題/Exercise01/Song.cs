@@ -7,32 +7,45 @@ using System.Threading.Tasks;
 namespace Exercise01 {//2.1.1
     public class Song {
         //クラス定義
-        String Title;
-        String ArtistName;
-        int Length;
-       
-        
+  //      String Title;
+   //     String ArtistName;
+    //    int Length;
         //2.1.2 コンストラクター定義
-        public Song(string title, string artistName, int length) {
-            Title = title;
-            ArtistName = artistName;
-            Length = length;
-        }
+      public Song(string title, string artistName, int length) {
+          Title = title;
+           ArtistName = artistName;
+           Length = length;
+         }
 
-        //コンストラクター
-        //  public string Title { get ; set; }
-        //  public string ArtistName { get; set; }
-        // public int Length { get; set; }
+        public string Title { get; set; } = string.Empty;
 
-        
-       // public string Title { get; set; } = string.Empty;
-       
-      //  public string ArtistName { get; set; } = string.Empty;
+        public string ArtistName { get; set; } = string.Empty;
+
+        public int Length { get; set; }
+
+
+        //計算
+     //   public string GetFormattedLength() {
+     //      int minutes = length / 60;
+     //       int seconds = length % 60;
+      //     return $"{minutes}:{seconds:D2}";
+     //  }
+      //  public override string ToString() {
+     //      return $"Title: {Title}, Artist: {ArtistName}, Length: {GetFormattedLength()}";
+     //  }
+    }
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
     
-       // public int Length { get; set; }
-
-
-
-    }
-
-    }
