@@ -9,17 +9,19 @@
     new Song("Honesty", "Billy Joel", 231),
     new Song("I Will Always Love You", "Whitney Houston", 273),
 };
-
+            printSongs(songs);
         }
-
-
         //2.1.4
         private static void printSongs(Song[] songs) {
-
-
-            
+            //  foreach (var Song in Song) {
+            //     String[] items = line.Split(',');
+            foreach (Song song in songs) {
+                Console.WriteLine(song. Title);
+                Console.WriteLine(song.ArtistName);
+                Console.WriteLine(song.Length);
+            }
+          
         }
-
 
     }
 }
