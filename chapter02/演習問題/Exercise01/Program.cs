@@ -60,7 +60,7 @@ namespace Exercise01 {
              printSongs(songs);
         }
         //2.1.4
-        private static void printSongs(List<Song> songs) {
+        private static void printSongs(IEnumerable<Song> songs) {
           //  foreach (var Song in Song) {
           //      String[] items = line.Split(',');
 #if fales
@@ -70,7 +70,7 @@ namespace Exercise01 {
                 Console.WriteLine($"{song.Title}, {song.ArtistName} {minutes}; {seconds;00}");
 
 #else
-                //TimeSpan構造体を使った場合
+               
                   foreach (var song in songs) {
                    
                       Console.WriteLine($"{song.Title}, {song.ArtistName} {song.Length}");
