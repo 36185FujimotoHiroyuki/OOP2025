@@ -17,19 +17,19 @@ namespace Exercise01 {
 
                 //endが入力されたら登録終了
                 if (title.Equals("end", StringComparison.OrdinalIgnoreCase))
-                    return;
+                    break;
                 //または↓
 
                 //endが入力されたら登録終了
-               // if (title.Equals("end")) return;
-               // if (title.Equals("END")) return;
-                
-                Console.WriteLine("アーティスト名");
+                // if (title.Equals("end")) return;
+                // if (title.Equals("END")) return;
+
+                Console.Write("アーティスト名");
                 //入力されたアーティスト名を取得
                 string artistName = Console.ReadLine();
 
 
-                Console.WriteLine("演奏時間（秒）：");
+                Console.Write("演奏時間（秒）：");
                 //入力された演奏時間を取得
 
                 int length = int.Parse(Console.ReadLine());
@@ -46,13 +46,6 @@ namespace Exercise01 {
 
             }
 
-
-
-
-
-
-
-
             //元の文
             // new Song("Let it be", "The Beatles", 243),
             // new Song("Bridge Over Troubled Water", "Simon & Garfunkel", 293),
@@ -64,12 +57,12 @@ namespace Exercise01 {
 
             // };
             //呼び出す分
-            // printSongs(songs);
+             printSongs(songs);
         }
         //2.1.4
-        private static void printSongs(Song[] songs) {
-            //  foreach (var Song in Song) {
-            //     String[] items = line.Split(',');
+        private static void printSongs(List<Song> songs) {
+          //  foreach (var Song in Song) {
+          //      String[] items = line.Split(',');
 #if fales
             foreach (Song song in songs) {
                 var minutes = song.Length / 60;
@@ -77,32 +70,26 @@ namespace Exercise01 {
                 Console.WriteLine($"{song.Title}, {song.ArtistName} {minutes}; {seconds;00}");
 
 #else
-            //TimeSpan構造体を使った場合
-            //  foreach (var song in songs) {
-            //      var timespan = Timespan.FromSeconds(song.Length);
-            //      Console.WriteLine($"{song.Title}, {song.ArtistName} {timespan,Minutes}; {timespan,seconds;00}");
+                //TimeSpan構造体を使った場合
+                  foreach (var song in songs) {
+                   
+                      Console.WriteLine($"{song.Title}, {song.ArtistName} {song.Length}");
 
-            //   }
+                //   }
 
-            //または、以下でも可
-            //  foreach(var song in songs) {
-            //    Console.WriteLine(@"{0},{1} {2:m\:ss)".
-            //        song.Title, song,AritstName,TimeSpan.FromSeconds()//途中
+                //または、以下でも可
+                //  foreach(var song in songs) {
+                //    Console.WriteLine(@"{0},{1} {2:m\:ss)".
+                //        song.Title, song,AritstName,TimeSpan.FromSeconds()//途中
 
-            //   }
-
-
-
-
-
-
-
+                // }
 #endif
-            Console.WriteLine();
+                Console.WriteLine();
+
+            }
 
         }
 
     }
-
 }
 
