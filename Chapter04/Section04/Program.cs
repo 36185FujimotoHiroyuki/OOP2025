@@ -58,13 +58,6 @@ namespace Section04 {
                 Console.WriteLine("エラー");
             }
 
-
-
-
-
-
-
-
             //try {
            //      int num = int.Parse(inputData);
           //        Console.WriteLine(num);
