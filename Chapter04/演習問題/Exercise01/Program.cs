@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Exercise01 {
     internal class Program {
@@ -50,7 +51,13 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(List<string> langs) {
-         
+            //2行で完結させる
+            // string lang = langs.Find(x => x.Length == 10) ?? "unknown";
+            var lang = langs.Find(x => x.Length == 10);
+
+            Console.WriteLine(lang ?? "unknown");
+
+
         }
     }
 }
