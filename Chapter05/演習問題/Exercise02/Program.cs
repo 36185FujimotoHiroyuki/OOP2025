@@ -27,19 +27,48 @@ namespace Exercise02 {
 
         private static void Exercise2(YearMonth[] ymCollection) {
 
-            var ym = new Exercise01.YearMonth();
-            bool ret =ym Is21Century;
+            //var ym = new Exercise01.YearMonth(2005, 10);
+            //if (ym .Is21Century)
+            // return "21世紀";
+            //else{
+            // return "21世紀ではない";
 
-
+            foreach (var ym in ymCollection) {
+                Console.WriteLine(ym);
+            }
         }
-        //5.2.3
+ 
+
+   //5.2.3
         //メソッドを作成｛メソッド名:FindFirst21c｝
-        private static void Exercise4(YearMonth[] ymCollection) {
-         
-        }
+     private static YearMonth? FindFirst21c(YearMonth[] ymCollection) {
+ //mita           
 
+            foreach (var ym in ymCollection) {
+                if (ym.Is21Century)
+                    return ym;
+                }
+                return null;
+     
+            }
+        private static void Exercise4(YearMonth[] ymCollection) {
+
+            var first21c = FindFirst21c(ymCollection);
+            if (first21c is null) {
+                Console.WriteLine("21世紀のデータはありません");
+            } else {
+                Console.WriteLine(first21c);
+            }
+            //null合体演算子
+
+          //Console.WriteLine(first21c?.ToString() ?? "21世紀のデータはありません");
+        }
         private static void Exercise5(YearMonth[] ymCollection) {
-           
+
+            var array = ymCollection.Select()
+
+
+
         }
     }
 }

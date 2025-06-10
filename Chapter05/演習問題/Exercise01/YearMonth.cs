@@ -36,15 +36,27 @@ namespace Exercise01 {
         //5.1.3
 
         public YearMonth AddOneMonth() {
-
-            if (true) {
-                return new YearMonth(year, month);//Monthが12月以外
+            //正解コード
+         
+            if (Month <= 11) {
+                return new YearMonth(Year, Month +1);//Monthが12月以外
 
             } else {
-                return new YearMonth(year, month);//Monthが１２月
+                return new YearMonth(Year + 1,1);//Monthが１２月
             }
-        
+
         }
+
+
+       //  if (Month =) {
+     //           return new YearMonth(year, month);
+
+  //  } else {
+   //             return new YearMonth(year, month);
+//}
+        
+       
+
         //5.1.4
         public override string ToString()
         //  return base.ToString();
