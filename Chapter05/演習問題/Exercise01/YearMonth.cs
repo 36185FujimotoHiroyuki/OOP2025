@@ -14,10 +14,10 @@ namespace Exercise01 {
         public int Month { get; init; }
 
 
-       // public int Year { get; }
-       //   public int Month { get; }
+        // public int Year { get; }
+        //   public int Month { get; }
 
-        public YearMonth(int year,int month) {
+        public YearMonth(int year, int month) {
             Year = Year;
             Month = month;
         }
@@ -26,7 +26,7 @@ namespace Exercise01 {
         //設定されている西暦が２１世紀か判断する
         //Yearが２００１～２１００年の間ならtrue,それ以外ならfalseを返す
 
-      //public bool Is21Century => Year >= 2001 && Year <= 2100;
+        //public bool Is21Century => Year >= 2001 && Year <= 2100;
         public bool Is21Century {
 
             get {
@@ -38,19 +38,21 @@ namespace Exercise01 {
         public YearMonth AddOneMonth() {
 
             if (true) {
-                return new YearMonth(year ,month);//Monthが12月以外
+                return new YearMonth(year, month);//Monthが12月以外
 
             } else {
                 return new YearMonth(year, month);//Monthが１２月
             }
-
+        
         }
         //5.1.4
-        public override string ToString() =>
-          //  return base.ToString();
+        public override string ToString()
+        //  return base.ToString();
+        {
+
+            return $"{Year}年{Month}月";
+
         }
-
-
     }
-
+}
 
