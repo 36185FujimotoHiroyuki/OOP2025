@@ -10,7 +10,7 @@ namespace Exercise01 {
     public class YearMonth {
         //5.1.1
 
-        public int Year { get; init; }
+        public int Year { get; init; } 
         public int Month { get; init; }
 
 
@@ -22,12 +22,18 @@ namespace Exercise01 {
             Month = month;
         }
 
-        //5.1.2
-        //設定されている西暦が２１世紀か判断する
-        //Yearが２００１～２１００年の間ならtrue,それ以外ならfalseを返す
 
-        //public bool Is21Century => Year >= 2001 && Year <= 2100;
-        public bool Is21Century {
+       // public record
+
+
+
+
+       //5.1.2
+       //設定されている西暦が２１世紀か判断する
+       //Yearが２００１～２１００年の間ならtrue,それ以外ならfalseを返す
+
+       //public bool Is21Century => Year >= 2001 && Year <= 2100;
+       public bool Is21Century {
 
             get {
                 return Year == 2100;

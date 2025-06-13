@@ -61,11 +61,18 @@ namespace Exercise02 {
             }
             //null合体演算子
 
-          //Console.WriteLine(first21c?.ToString() ?? "21世紀のデータはありません");
+            //Console.WriteLine(first21c?.ToString() ?? "21世紀のデータはありません");
+//正解コード
+            //var YearMonth = FindFirst21c(ymCollection);
+            //var str = YearMonth?.ToString() ?? "21世紀のデータはありません";
+            // Console.WriteLine(str);
+//正解コード
+       //Console.WriteLine(FindFirst21c(ymCollection)?.ToString() ?? "21世紀のデータはありません");
         }
         private static void Exercise5(YearMonth[] ymCollection) {
 
-            var array = ymCollection.Select()
+            var array = ymCollection.Select(ym => ym.AddOneMonth()).ToArray();
+            Exercise02(array);
 
 
 
