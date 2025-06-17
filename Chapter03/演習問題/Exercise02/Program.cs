@@ -61,7 +61,7 @@ namespace Exercise02 {
             var obj = names.Where(s => s.StartsWith('B'))
                                 .Select(s => new {s,s.Length});
             foreach(var data in obj) {
-                Console.WriteLine(data.s + ":"data.Length + "文字");
+                Console.WriteLine(data.s + ":",data.Length + "文字");
             }
 
 
