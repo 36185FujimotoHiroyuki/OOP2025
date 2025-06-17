@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test01 {
+    public class Student {       //プロパティ
+
+        //学生の名前
+        public string Name { get; set; }
+
+        //科目名
+        public string Subject { get; set; }
+        //点数
+        public int Score { get; set; }
+
+        public Student(string Name, string Subject, int Score) {
+            this.Name = Name;
+            this.Subject = Subject;
+            this.Score = Score;
+        }
+    }
+}
