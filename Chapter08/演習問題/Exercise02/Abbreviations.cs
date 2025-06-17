@@ -27,7 +27,19 @@ public class Abbreviations {
         foreach (var (key, value) in _dict) {
             if (value.Contains(substring)) {
                 yield return (key, value);
-            }
-        }
+       }
+        
+     }
+  }
+    //8.2.1
+    public int Coount => _dict.Count;
+
+    //8.2.2//一行コード
+    public bool Remove(string abb) => _dict.Remove(abb);
+
+    public IEnumerable<KeyValuePair<string, string>> GetAll() {
+        return _dict;
     }
+           
+   
 }
