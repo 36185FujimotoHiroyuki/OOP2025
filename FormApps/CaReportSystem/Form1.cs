@@ -3,11 +3,18 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using static CaReportSystem.CarReport;
+using System.Xaml.Permissions;
 
 namespace CaReportSystem {
     public partial class Form1 : Form {
         //カーレポート管理用リスト
         BindingList<CarReport> ListCarReports = new BindingList<CarReport>();
+
+        //設定クラスのインスタンスを生成
+        Setting
+
+
+
         public Form1() {
             InitializeComponent();
             dguRecord.DataSource = ListCarReports;
@@ -233,6 +240,11 @@ namespace CaReportSystem {
 
             dguRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
+            //設定ファイルを読み込み背景色を設定（逆シリアル化）
+
+
+
+
         }
 
         private void ファイルFToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -252,6 +264,12 @@ namespace CaReportSystem {
 
             if (cdCollar.ShowDialog() == DialogResult.OK) {
                 BackColor = cdCollar.Color;
+                //設定ファイルへ保存
+                settings.MainFormBackColor = cdCollar.Color.ToArgb();//背景色を設定インスタンスへ設定
+
+
+
+
             }
         }
 
@@ -272,7 +290,7 @@ namespace CaReportSystem {
 
                         cbAuthor.Items.Clear();
                         //コンボボックスに登録
-                     foreach(var report in ListCarReports) {
+                        foreach (var report in ListCarReports) {
                             setCbAuthor(report.Author);
                             setCbCarName(report.CarName);
 
@@ -289,7 +307,7 @@ namespace CaReportSystem {
             }
         }
 
-        
+
 
         //ファイルセーブ処理
         private void reportSaveFile() {
@@ -335,6 +353,21 @@ namespace CaReportSystem {
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+
+
+
+        //フォームが閉じたら呼ばれる
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルへ色情報を保存する処理（シリアル化）
+
+            var colorSettings = new ColorSettings {
+                //FormBackgroundColor
+                MainFormBackColor = BackColor
+            };
+
 
         }
     }
