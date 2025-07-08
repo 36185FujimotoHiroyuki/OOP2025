@@ -4,8 +4,8 @@
 
         // コンストラクタ
         public ScoreCounter(string filePath) {
-
-            _score = ReadScore("./StudentScore.csv");
+            //"./StudentScore.csv"
+            _score = ReadScore(filePath);
         }
 
         //メソッドの概要： 
