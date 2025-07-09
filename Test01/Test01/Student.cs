@@ -16,10 +16,8 @@ namespace Test01 {
         //点数
         public int Score { get; set; }
 
-        public Student(string Name, string Subject, int Score) {
-            this.Name = Name;
-            this.Subject = Subject;
-            this.Score = Score;
+
+
         }
     }
-}
+

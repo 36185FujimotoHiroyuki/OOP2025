@@ -18,32 +18,44 @@ namespace Test01 {
         private static IEnumerable<Student> ReadScore(string filePath) {
             //   public IEnumerable<Sale> ReadSales(string filePath) {
 
-            var student = new List<Student>();
-
-            string[] lines = File.ReadAllLines(filePath);
-
-            foreach (var line in lines) {
+        List<Student> score = new List<Student>();
+        
+        string[] lines = File.ReadAllLines(filePath);
+           
+            foreach (string line in lines) {
                 String[] items = line.Split(',');
-
-                Student sale = new Student() {
-
-                    Name = items[0],
-                    Subject = items[1],
-                    Score = int.Student(items[2]),
-
-
-                };
-                Student.Add(student);
+       
+        Student student = new Student() {
+            Name = items[0],
+            Subject = items[1],
+            Score = int.Parse(items[2]),
+        };
+        score.Add(student);
             }
-        }
+            return score;
 
+            //(score.Subject)
+            //Subject
+        }
         //メソッドの概要： 
         public IDictionary<string, int> GetPerStudentScore() {
-
-
-            var score = new SortedDictionary<string, int>();
             Dictionary<string, int> dict = new Dictionary<string, int>();
 
+            // var dict = new SortedDictionary<string, int>();
+
+
+            // Console.WriteLine(ScoreCounter.Sum());
+           
+
+            foreach (var score in _score) {
+                if (dict.ContainsKey(score.Subject)) {
+                    dict[score.Name] += score.Score;
+                } else {
+                    dict[score.Name] = score.Score;
+                }
+            }
+            return dict;
+ 
         }
     }
 
