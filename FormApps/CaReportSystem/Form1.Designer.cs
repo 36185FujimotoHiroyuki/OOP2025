@@ -275,6 +275,7 @@
             dguRecord.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dguRecord.Size = new Size(931, 177);
             dguRecord.TabIndex = 5;
+            dguRecord.CellContentClick += dguRecord_CellContentClick;
             dguRecord.Click += dguRecord_Click;
             // 
             // pbPicture
@@ -388,21 +389,21 @@
             // Collar
             // 
             Collar.Name = "Collar";
-            Collar.Size = new Size(180, 22);
+            Collar.Size = new Size(110, 22);
             Collar.Text = "色情報";
             Collar.Click += Collar_Click;
             // 
             // 開くToolStripMenuItem
             // 
             開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            開くToolStripMenuItem.Size = new Size(180, 22);
+            開くToolStripMenuItem.Size = new Size(110, 22);
             開くToolStripMenuItem.Text = "開く";
             開くToolStripMenuItem.Click += 開くToolStripMenuItem_Click;
             // 
             // 保存ToolStripMenuItem
             // 
             保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            保存ToolStripMenuItem.Size = new Size(180, 22);
+            保存ToolStripMenuItem.Size = new Size(110, 22);
             保存ToolStripMenuItem.Text = "保存";
             保存ToolStripMenuItem.Click += 保存ToolStripMenuItem_Click;
             // 

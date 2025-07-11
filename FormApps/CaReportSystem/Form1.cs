@@ -4,6 +4,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using static CaReportSystem.CarReport;
 using System.Xaml.Permissions;
+using System.Text;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace CaReportSystem {
     public partial class Form1 : Form {
@@ -11,7 +14,8 @@ namespace CaReportSystem {
         BindingList<CarReport> ListCarReports = new BindingList<CarReport>();
 
         //設定クラスのインスタンスを生成
-        Setting
+        Setting settings = new Setting();
+
 
 
 
@@ -38,8 +42,9 @@ namespace CaReportSystem {
         //    tsslbMessage.Text = "記録者、または車名が未入力です";
 
 
-        //    pbPicture.Image = null;
-        //  }
+        private void btPicDelete_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
+        }
 
         //記録者の履歴をコンボボックスへ登録（重複なし）
         private void setCbAuthor(string author) {
@@ -176,15 +181,15 @@ namespace CaReportSystem {
         private void btRecordModify_Click(object sender, EventArgs e) {
             if ((dguRecord.CurrentRow == null) ||
               (!dguRecord.CurrentRow.Selected)) return;
-
-
-            //間違い
-            //    if (dguRecord.CurrentRow == null) return;
-            // var current = dguRecord.CurrentRow.DataBoundItem as CarReport;
-            //  if (current == null) return;
-            //  dguRecord.Refresh();
-            //  InputItemAIICIear();
         }
+
+        //間違い
+        //    if (dguRecord.CurrentRow == null) return;
+        // var current = dguRecord.CurrentRow.DataBoundItem as CarReport;
+        //  if (current == null) return;
+        //  dguRecord.Refresh();
+        //  InputItemAIICIear();
+
         //間違い
         // 修正ボタンのイベントパンドラ
         //  private void btRecordModify_Click(object sender, EventArgs e) {
@@ -218,20 +223,11 @@ namespace CaReportSystem {
             int Index = dguRecord.CurrentRow.Index;
             //削除したいインデックスを指定してリストから削除
             ListCarReports.RemoveAt(Index);
-
-
-            //間違い
-            // if (dguRecord.CurrentRow == null) return;
-            // var current = dguRecord.CurrentRow.DataBoundItem as CarReport;
-            //  if (current == null) return;
-            // ListCarReports.Remove(current);
-            //  dguRecord.Refresh();
-
         }
 
 
         private void Form1_Load(object sender, EventArgs e) {
-            InputItemAIICIear();
+             InputItemAIICIear();
 
             //交互に色を設定（データグリッドビュー）
 
@@ -241,9 +237,25 @@ namespace CaReportSystem {
             dguRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
             //設定ファイルを読み込み背景色を設定（逆シリアル化）
+            //P286以降を持参にする（ファイル名：setting.xml
 
+            try {
+                using (var reader = XmlReader.Create("setting.xml")) {
+                    var serializer = new XmlSerializer(typeof(Setting));
+                    var set = serializer.Deserialize(reader) as Setting;
+                    BackColor = Color.FromArgb(set.MainFormBackColor);
+                }
+            }
 
+            catch (Exception) {
+                tsslbMessage.Text = "設定ファイル読み込みエラー";
+                MessageBox.Show(ex.Message);//←より具体的なエラーを出力
 
+            }
+        }else{
+                   tsslbMessage.Text = "設定ファイルがありません";
+            
+            
 
         }
 
@@ -263,6 +275,7 @@ namespace CaReportSystem {
         private void Collar_Click(object sender, EventArgs e) {
 
             if (cdCollar.ShowDialog() == DialogResult.OK) {
+
                 BackColor = cdCollar.Color;
                 //設定ファイルへ保存
                 settings.MainFormBackColor = cdCollar.Color.ToArgb();//背景色を設定インスタンスへ設定
@@ -272,6 +285,7 @@ namespace CaReportSystem {
 
             }
         }
+
 
         //ファイルオープン処理
         private void reportOpenFile() {
@@ -299,6 +313,7 @@ namespace CaReportSystem {
                     }
 
                 }
+                //例外エラー処理
                 catch (Exception) {
                     tsslbMessage.Text = "ファイル形式が違います";
 
@@ -306,7 +321,6 @@ namespace CaReportSystem {
 
             }
         }
-
 
 
         //ファイルセーブ処理
@@ -347,29 +361,45 @@ namespace CaReportSystem {
             catch (Exception ex) {
 
                 tsslbMessage.Text = "保存時にエラーが発生しました: " + ex.Message;
-
             }
-
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
             reportSaveFile();
         }
 
-
-
-
         //フォームが閉じたら呼ばれる
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルへ色情報を保存する処理（シリアル化）
+            //（ファイル名：setting.xml）
 
-            var colorSettings = new ColorSettings {
-                //FormBackgroundColor
-                MainFormBackColor = BackColor
-            };
 
+            // var colorSettings = new ColorSettings {
+            //FormBackgroundColor
+            //    MainFormBackColor =  this.BackColor
+            // };
+            // using (var fs = new FileStream("colors.bin", FileMode.Create)) {
+            //     var formatter = new BinaryFormatter();
+            //    formatter.Serialize(fs, colorSettings);
+
+            try {
+
+            using (var writer = XmlWriter.Create("setting.xml")) ;
+                 var serializer = new XmlSerializer(setting.GetType());
+            serializer.Serialize(textWriter, settings);
+            }
+}
+        catch(Exception ex) {
+            teslbMessage.Text = "設定ファイル";
+            MassageBox.Show(ex.)
 
         }
+        
+    
+
+      //  private void dguRecord_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+       // }
     }
 }
     

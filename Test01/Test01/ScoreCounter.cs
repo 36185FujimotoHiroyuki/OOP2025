@@ -44,11 +44,11 @@ namespace Test01 {
             // var dict = new SortedDictionary<string, int>();
 
 
-            // Console.WriteLine(ScoreCounter.Sum());
-           
+            // Console.WriteLine(.Sum());
+
 
             foreach (var score in _score) {
-                if (dict.ContainsKey(score.Subject)) {
+                if (dict.ContainsKey(score.Name)) {
                     dict[score.Name] += score.Score;
                 } else {
                     dict[score.Name] = score.Score;
