@@ -275,7 +275,7 @@
             dguRecord.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dguRecord.Size = new Size(931, 177);
             dguRecord.TabIndex = 5;
-            dguRecord.CellContentClick += dguRecord_CellContentClick;
+          //  dguRecord.CellContentClick += dguRecord_CellContentClick;
             dguRecord.Click += dguRecord_Click;
             // 
             // pbPicture

@@ -14,10 +14,10 @@ namespace CaReportSystem {
         BindingList<CarReport> ListCarReports = new BindingList<CarReport>();
 
         //設定クラスのインスタンスを生成
-        Setting settings = new Setting();
-
-
-
+       
+       
+        Setting settings = Setting.getInstance();
+       
 
         public Form1() {
             InitializeComponent();
@@ -227,7 +227,7 @@ namespace CaReportSystem {
 
 
         private void Form1_Load(object sender, EventArgs e) {
-             InputItemAIICIear();
+            InputItemAIICIear();
 
             //交互に色を設定（データグリッドビュー）
 
@@ -255,7 +255,7 @@ namespace CaReportSystem {
         }else{
                    tsslbMessage.Text = "設定ファイルがありません";
             
-            
+          
 
         }
 
@@ -393,7 +393,7 @@ namespace CaReportSystem {
             teslbMessage.Text = "設定ファイル";
             MassageBox.Show(ex.)
 
-        }
+        
         
     
 
