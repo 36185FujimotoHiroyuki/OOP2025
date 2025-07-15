@@ -35,8 +35,8 @@ namespace Exercise01 {
 
 
             //問題12.1.3
-           // var empdata = Deserialize_f("employees.json");
-           // foreach (var empd in empdata)
+            // var empdata = Deserialize_f("employees.json");
+            // foreach (var empd in empdata)
             //    Console.WriteLine(empd);
 
 
@@ -64,24 +64,42 @@ namespace Exercise01 {
         //シリアル化してファイルへ出力する
         static void Serialize(string filePath, IEnumerable<Employee> employees) {
 
+            var options = new JsonSerializerOptions {
 
-            var jsonString = JsonSerializer.Serialize(employees);
-            File.WriteAllText(filePath, jsonString);
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
+ };//シリアル化
+            byte[] utf8Bytes = JsonSerializer.SerializeToUtf8Bytes(employees, options);
+            File.WriteAllBytes(filePath, utf8Bytes);
         }
 
         //問題12.1.3
-        //シリアル化してファイルへ出力する
-        static void Serialize(string filePath, IEnumerable<Employee> employee) {
+        //逆シリアル化して返却
+        static Employee[] Deserialize_f(string filePath) {
+
+            var text = File.ReadAllText("./novelists.json");
+            var novelist = JsonSerializer.Deserialize<List<Novelist>>(text);
+            return Employee
+
+
+
 
         }
+    }
 
 
 
+
+
+}
+
+    
+    public record Employee {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public DateTime HireDate { get; set; }
+
+      
 
     }
-    public record Employee {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public DateTime HireDate { get; set; }
-}
-}
