@@ -69,7 +69,7 @@ namespace Exercise01 {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true
- };//シリアル化
+            };//シリアル化
             byte[] utf8Bytes = JsonSerializer.SerializeToUtf8Bytes(employees, options);
             File.WriteAllBytes(filePath, utf8Bytes);
         }
@@ -78,28 +78,34 @@ namespace Exercise01 {
         //逆シリアル化して返却
         static Employee[] Deserialize_f(string filePath) {
 
-            var text = File.ReadAllText("./novelists.json");
-            var novelist = JsonSerializer.Deserialize<List<Novelist>>(text);
-            return Employee
+            var options = new JsonSerializerOptions {
+
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
+            };
+
+
+            var text = File.ReadAllText(filePath);
+            var employee = JsonSerializer.Deserialize<Employee[]>(text, options);
+            return employee ?? [];
+
 
 
 
 
         }
+
+
     }
 
 
-
-
-
-}
-
-    
     public record Employee {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public DateTime HireDate { get; set; }
 
-      
+
 
     }
+}
