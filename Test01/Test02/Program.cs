@@ -1,5 +1,7 @@
 ﻿
 
+using System.Globalization;
+
 namespace Test02 {
     internal class Program {
         static void Main(string[] args) {
@@ -62,8 +64,10 @@ namespace Test02 {
 
         //問題１　合計値を表示（式形式で記述せよ）
         //　　　　出力結果【618】
-        private static void Exercise01(int[] numbers) => Console.WriteLine(numbers.Sum());
+         private static void Exercise01(int[] numbers) => Console.WriteLine(numbers.Sum());
 
+       // var heikin = NumberStyles.average();
+       // Console.WriteLine
 
         //問題２　偶数の最大値を表示（式形式で記述せよ）
         //　　　　出力結果【94】
