@@ -46,8 +46,8 @@ namespace SampleApplication {
 
             checkBoxTextBlock.Text = "チェック済み";
         }
-      
-        
+     
+
         }
     }
 }
