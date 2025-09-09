@@ -14,10 +14,10 @@ namespace CaReportSystem {
         BindingList<CarReport> ListCarReports = new BindingList<CarReport>();
 
         //設定クラスのインスタンスを生成
-       
-       
+
+
         Setting settings = Setting.getInstance();
-       
+
 
         public Form1() {
             InitializeComponent();
@@ -384,12 +384,17 @@ namespace CaReportSystem {
 
             try {
 
-            using (var writer = XmlWriter.Create("setting.xml")) ;
-                 var serializer = new XmlSerializer(setting.GetType());
-            serializer.Serialize(textWriter, settings);
+                using (var writer = XmlWriter.Create("setting.xml")) ;
+                var serializer = new XmlSerializer(setting.GetType());
+                serializer.Serialize(textWriter, settings);
             }
 }
-        catch(Exception ex) {
+
+        private void dguRecord_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }        catchprivate void btRecordadd_Click_1(object sender, EventArgs e) {
+
+        }(Exception ex) {
             teslbMessage.Text = "設定ファイル";
             MassageBox.Show(ex.)
 
