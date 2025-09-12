@@ -12,7 +12,7 @@ namespace ColorChecker
        public Color Color { get; set; }
         public string Name { get; set; }
         public override string ToString() {
-            return base.ToString();
+            return Name ?? string.Format("R: {0.3}  G: {0.3}  B: {0.3}" , Color.R , Color.G , Color.B);
 
 
 
