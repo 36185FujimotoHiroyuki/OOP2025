@@ -76,11 +76,6 @@ namespace ColorChecker
             if (!colorExists) {
                 colorListBox.Items.Add(newColor);
             }
-
-
-
-
-
             // カラーリストに追加
            // colorListBox.Items.Add(newColor);
 

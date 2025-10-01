@@ -70,7 +70,7 @@
 
             <!--<ListBox x:Name="colorListBox" Grid.Row="1" DisplayMemberPath="Name" />--> <!--SelectionChanged="colorListBox_SelectionChanged"-->
 
-            <ListBox x:Name="colorListBox" Grid.Row="1" DisplayMemberPath="Name" SelectionChanged="colorListBox_SelectionChanged" FontSize="30" FontStretch="Expanded"/>
+            <ListBox x:Name="colorListBox" Grid.Row="1" DisplayMemberPath="Name" SelectionChanged="colorListBox_SelectionChanged" FontSize="25" FontStretch="Expanded"/>
 
 
 
