@@ -8,18 +8,18 @@
         Title="ConverterApp" SizeToContent="WidthAndHeight">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="MetricValue" Margin="4" Width="100" />
-            <ComboBox Name="MetricUnit" Margin="4" Width="80" />
+            <TextBox Name="MetricValue" Margin="4" Width="100" TextChanged="MetricValue_TextChanged" />
+            <ComboBox Name="MetricUnit" Margin="4" Width="80" SelectionChanged="MetricUnit_SelectionChanged" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Name="ImperialUnitToMetric" Margin="4" Width="40" Content="▲" />
-            <Button Name="MetricToImperiaUnit" Margin="4" Width="40" Content="▼" />
+            <Button Name="ImperialUnitToMetric" Margin="4" Width="40" Content="▲" Click="ImperialUnitToMetric_Click" />
+            <Button Name="MetricToImperiaUnit" Margin="4" Width="40" Content="▼" Click="MetricToImperiaUnit_Click" />
             
 
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="ImperialValue" Margin="4" Width="100" />
-            <ComboBox Name="ImperialUnit" Margin="4" Width="80" />
+            <TextBox Name="ImperialValue" Margin="4" Width="100" TextChanged="ImperialValue_TextChanged" />
+            <ComboBox Name="ImperialUnit" Margin="4" Width="80" SelectionChanged="ImperialUnit_SelectionChanged" />
 
         </StackPanel>
 
