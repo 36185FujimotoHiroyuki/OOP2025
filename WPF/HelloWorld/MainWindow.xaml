@@ -24,5 +24,6 @@
         <TextBlock Text="{Binding GreetingMessage}" Grid.ColumnSpan="2"/>
         <Button Content="ChangeMessage" Grid.Row="1"
                 Command="{Binding ChangeMessageCommand}"/>
+                
     </Grid>
 </Window>
