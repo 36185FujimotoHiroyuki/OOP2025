@@ -11,8 +11,11 @@ namespace Sample.Data
         [PrimaryKey,AutoIncrement]
         public int Id { get; set; }
         //名前
+
         public string Name { get; set; } = string.Empty;
         //電話番号
+
+
         public string Phone { get; set; } = string.Empty;
 
 
