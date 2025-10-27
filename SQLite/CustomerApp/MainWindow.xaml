@@ -23,8 +23,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,390,10">
             <Button Content="更新" x:Name="UpdateButton" Width="100" Margin="0,0,10,0" Click="UpdateButton_Click" FontSize="20"/>
-
-            <Button Content="保存" x:Name="ReadButton" Width="100" Margin="30,0,40,0" Click="ReadButton_Click" FontSize="20"/>
+            <Button Content="保存" x:Name="SaveButton" Width="100" Margin="30,0,40,0" Click="SaveButton_Click" FontSize="20"/>
             <Button Content="消去" x:Name="DeleteButton" Width="109" Click="DeleteButton_Click" FontSize="20"/>
         </StackPanel>
 
@@ -38,13 +37,14 @@
                 <GridView>
                     <GridViewColumn Header="名前"  DisplayMemberBinding="{Binding Name}" Width="200"/>
                     <GridViewColumn Header="電話番号"  DisplayMemberBinding="{Binding Phone}" Width="200" />
-                    <GridViewColumn Header="住所"  DisplayMemberBinding="{Binding Address}" Width="200" />
+                    <GridViewColumn Header="住所"  DisplayMemberBinding="{Binding Address}" Width="400" />
                 </GridView>
             </ListView.View>
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="0,-10,0,0" TextWrapping="Wrap" Text="名前" VerticalAlignment="Top" Width="133" Height="33" Grid.RowSpan="2" FontSize="25"/>
         <TextBlock Margin="251,-10,419,0" TextWrapping="Wrap" Text="電話番号" VerticalAlignment="Top" Height="33" FontSize="25"/>
         <TextBlock Margin="567,-10,138,0" TextWrapping="Wrap" Text="住所" VerticalAlignment="Top" Height="33" FontSize="25"/>
-        <Image HorizontalAlignment="Left" Height="153" Margin="426,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="306" Grid.RowSpan="3"/>
+        <Image HorizontalAlignment="Left" Height="153" Margin="395,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="306" Grid.RowSpan="3"/>
+        <Button Content="画像" x:Name="imageTextBox" FontSize="25" Click="Image_Click" RenderTransformOrigin="0.609,0.51" Margin="715,20,10,223" Grid.Row="1" Grid.RowSpan="3" />
     </Grid>
 </Window>
