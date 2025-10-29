@@ -51,12 +51,12 @@ namespace Exercise01 {
             }
         }
         private static void Exercise1_4() {
-            var sortedBooks = Library.Books
+            var Books = Library.Books
            
             .OrderByDescending(b => b.PublishedYear)
             .ThenByDescending(b => b.Price);
 
-            foreach (var book in sortedBooks) {
+            foreach (var book in Books) {
                 Console.WriteLine($"{book.PublishedYear}年 {book.Price}円 {book.Title}");
 
             }
