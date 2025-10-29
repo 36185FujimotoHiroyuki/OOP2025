@@ -52,7 +52,7 @@ namespace Exercise01 {
         }
         private static void Exercise1_4() {
             var Books = Library.Books
-           
+
             .OrderByDescending(b => b.PublishedYear)
             .ThenByDescending(b => b.Price);
 
@@ -65,12 +65,12 @@ namespace Exercise01 {
         private static void Exercise1_5() {
 
             var Books = Library.Books
-       .Where(book => book.PublishedYear == 2022)
-       .Select(book => book.CategoryId)
-       .Distinct()
-       .OrderBy(category => category);
-      
-
+            .Where(book => book.PublishedYear == 2022)
+            .Join(Library.Categories,
+                  book => book.CategoryId,
+                  category => category.Id,
+                  (book, category) => category.Name)
+            .Distinct();
             foreach (var category in Books) {
                 Console.WriteLine(category);
             }
@@ -79,6 +79,10 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_6() {
+
+
+
+
 
         }
 
