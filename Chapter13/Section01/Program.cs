@@ -1,7 +1,7 @@
 ﻿namespace Section01 {
     internal class Program {
         static void Main(string[] args) {
-            var books = Library.Books
+           // var group = Library.Categories
        //var price = Library.Books
        //    .Where(b => b.CategoryId == 1)
        //     .Max(b => b.Price);
@@ -30,28 +30,27 @@
 
 
 
-      private static void Exercise1_7() {
-            var books = Library.Books
-                .Join(Library.Categories,                    // JoinでBooksとCategoriesを結合
-                      book => book.CategoryId,               // 結合条件：BookのCategoryId
-                      category => category.Id,              // 結合条件：CategoryのId
-                      (book, category) => new {             // 結合後に新しい匿名型を作成
-                          book.Title,                       // タイトル
-                          CategoryName = category.Name,     // カテゴリ名
-                          book.PublishedYear                // 発行年
-                      })
-            .OrderBy(b => b.PublishedYear)
-                .ThenBy(b => b.Category);
+     
+           
+               // .GroupJoin(Library.Books,                    // JoinでBooksとCategoriesを結合
+                 //     ,c => c.Id              // 結合条件：BookのCategoryId
+                 //    ,b => b.category,              // 結合条件：CategoryのId
+                 //     (book, category) => new {             // 結合後に新しい匿名型を作成
+                                                            // タイトル
+                 //         category = c.Name,     // カテゴリ名
+                  //        book.books,                // 発行年
+                  //    })
+          
             // 結果をコンソールに出力
-            foreach (var book in books) {
-                Console.WriteLine($"{book.Title} ({book.Category}, {book.PublishedYear}年)");
+          //  foreach (var book in books) {
+            //    Console.WriteLine($"{book.Title} ({book.Category}, {book.PublishedYear}年)");
 
 
 
             }
         }
     }
-}
+
 
 
 

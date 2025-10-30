@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
@@ -80,18 +82,65 @@ namespace Exercise01 {
 
         private static void Exercise1_6() {
 
+            var booksCategory = Library.Books
+           .Join(Library.Categories,
+                 book => book.CategoryId,
+                 category => category.Id,
+                 (book, category) => new { book, category.Name })
+           .GroupBy(b => b.Name)
+           .OrderBy(g => g.Key);
 
-
-
-
+            foreach (var categoryGroup in booksCategory) {
+                Console.WriteLine($"# {categoryGroup.Key}");
+                foreach (var book in categoryGroup) {
+                    Console.WriteLine($"  {book.book.Title}");
+                }
+            }
         }
 
         private static void Exercise1_7() {
 
+
+            var booksCategory = Library.Books
+
+           .Join(Library.Categories,
+                 book => book.CategoryId,
+                 category => category.Id,
+                 (book, category) => new { book, category.Name })
+
+                    .Where(b => b.Name == "Development")
+               .OrderBy(b => b.book.Title);
+
+            foreach (var item in booksCategory) {
+                Console.WriteLine($"# {item.Name}");
+                Console.WriteLine($"  {item.book.Title}");
+
+            }
         }
 
         private static void Exercise1_8() {
 
+
+            var categoryNames = Library.Categories
+        .GroupJoin(Library.Books,
+            c => c.Id,
+            b => b.CategoryId,
+            (c, books) => new {
+                CategoryName = c.Name, 
+                Count = books.Count()   
+            })
+        .Where(x => x.Count >= 4)   
+        .Select(x => x.CategoryName);
+
+            foreach (var name in categoryNames) 
+            {
+                Console.WriteLine(name);
+
+
+
+
+
+            }
         }
     }
 }
