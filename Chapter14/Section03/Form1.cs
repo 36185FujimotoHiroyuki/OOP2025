@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Section03 {
     public partial class Form1 : Form {
         public Form1() {
@@ -8,11 +10,15 @@ namespace Section03 {
 
 
             toolStripStatusLabel1.Text = "";
-            await Task.Run(() => DoLongTimeWork());
+            var elapsed = await Task.Run(() => DoLongTimeWork());
             toolStripStatusLabel1.Text = "終了";
         }
-        private void DoLongTimeWork() {
+        //戻り値のある同期メゾット
+        private long DoLongTimeWork() {
+            var sw = Stopwatch.StartNew();
             System.Threading.Thread.Sleep(5000);
+            sw.Stop();
+            return sw.ElapsedMilliseconds;
         }
 
 
