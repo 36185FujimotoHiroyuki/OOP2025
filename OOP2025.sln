@@ -197,6 +197,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise01（WPF）", "Chap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Section04", "Chapter14\Section04\Section04.csproj", "{91DB66F3-4E1F-47D4-8FB1-F2BE496C13D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBrowser", "Chapter14\WebBrowser\WebBrowser.csproj", "{2D601250-D3AC-4313-AAB1-7720B37D8E00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -459,6 +461,10 @@ Global
 		{91DB66F3-4E1F-47D4-8FB1-F2BE496C13D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91DB66F3-4E1F-47D4-8FB1-F2BE496C13D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91DB66F3-4E1F-47D4-8FB1-F2BE496C13D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D601250-D3AC-4313-AAB1-7720B37D8E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D601250-D3AC-4313-AAB1-7720B37D8E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D601250-D3AC-4313-AAB1-7720B37D8E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D601250-D3AC-4313-AAB1-7720B37D8E00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -541,6 +547,7 @@ Global
 		{21C13B36-183B-4932-91EA-2DE5A0D2DC12} = {A3FBBBEF-ADB4-4D21-8500-A3F6241BEB0B}
 		{E75AD5FF-9B46-459E-B225-4F5C84561E92} = {A3FBBBEF-ADB4-4D21-8500-A3F6241BEB0B}
 		{91DB66F3-4E1F-47D4-8FB1-F2BE496C13D9} = {3B4DA025-5744-4591-80B7-405BD02FE471}
+		{2D601250-D3AC-4313-AAB1-7720B37D8E00} = {3B4DA025-5744-4591-80B7-405BD02FE471}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75369306-ACAD-482C-93AF-D284035616A9}
