@@ -7,8 +7,7 @@
             Console.Write("パスの入力:");
             prcessor.Run(Console.ReadLine());
 
-
-
+      
 
 
 
