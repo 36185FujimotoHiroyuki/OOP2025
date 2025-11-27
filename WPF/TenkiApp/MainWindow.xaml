@@ -36,7 +36,7 @@
     <Grid Margin="0,0,0,-144">
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\infosys\Downloads\splash_00192.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="splash_00192.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
