@@ -5,8 +5,134 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="TenkiApp" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="SearchButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF1E88E5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF42A5F5"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF1565C0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-144">
 
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\infosys\Downloads\splash_00192.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="20,20,2,20" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.184"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.497"/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+
+            <TextBlock Text="県名で検索" 
+                FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+            <Grid Margin="0,0,0,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="PrefectureInput" 
+                    Grid.Column="0"
+                    Text="東京" 
+                    Padding="5" 
+                    Margin="0,0,5,0" 
+                    Height="33" 
+                    FontSize="16"/>
+
+                <Button x:Name="SearchButton" 
+                 Grid.Column="1"
+                 Content="検索" 
+                 Click="SearchButton_Click" 
+                 Style="{StaticResource SearchButtonStyle}"/>
+            </Grid>
+
+            <TextBlock Text="緯度・経度を入力" 
+                FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+            <Label Content="緯度:" FontWeight="Bold"/>
+            <TextBox x:Name="LatitudeInput" Text="35.6895" Padding="5" Margin="0,0,0,10" TextChanged="Ido_TextChanged" Height="33"/>
+
+            <Label Content="経度 :" FontWeight="Bold"/>
+            <TextBox x:Name="LongitudeInput" Text="139.6917" Padding="5" Margin="0,0,0,20" TextChanged="Keido_TextChanged"/>
+
+            <Border BorderBrush="#FFA0A0A0" BorderThickness="1" Padding="15" CornerRadius="5" Width="331">
+                <StackPanel>
+                    <TextBlock Text="現在の天気情報" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" Width="246" RenderTransformOrigin="0.128,0.459"/>
+                    <TextBlock x:Name="LocationTextBlock" Text="場所: --" FontSize="30" FontWeight="SemiBold" Foreground="Bisque" Margin="0,0,0,5" Width="304"/>
+                    <TextBlock x:Name="TimeTextBlock" Text="取得時刻: --" FontSize="14" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="TemperatureTextBlock" Text="気温: -- °C" FontSize="30" FontWeight="ExtraBold" Foreground="Bisque" Margin="0,0,0,10" Width="304"/>
+                    <TextBlock x:Name="WindSpeedTextBlock" Text="風速: -- m/s" FontSize="16"/>
+                    <TextBlock x:Name="HumidityTextBlock" Text="湿度: -- %" FontSize="16"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+
+        <DockPanel Grid.Column="1" Margin="20,20,20,277">
+
+            <TextBlock DockPanel.Dock="Top" Text="週間予報 " 
+                               FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <ListView x:Name="ForecastListView" DockPanel.Dock="Top" Height="259" SelectionChanged="ForecastListView_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="日付" DisplayMemberBinding="{Binding Date}" Width="90"/>
+                        <GridViewColumn Header="天気記号" DisplayMemberBinding="{Binding WeatherCode}" Width="120"/>
+                        <GridViewColumn Header="最高気温" DisplayMemberBinding="{Binding MaxTemperature}" Width="100"/>
+                        <GridViewColumn Header="最低気温" DisplayMemberBinding="{Binding MinTemperature}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0,20,0,0"/>
+
+        </DockPanel>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Visibility="Collapsed"/>
+        <Button Grid.Column="1" Content="update" HorizontalAlignment="Left" Margin="317,321,0,0" VerticalAlignment="Top" Width="113" Height="225" FontSize="31" FontWeight="Heavy" Click="UpdateButton_Click"/>
+
+        <TextBox x:Name="TextBox" 
+                 Grid.Column="1" 
+                 HorizontalAlignment="Left" 
+                 Margin="20,245,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="北海道&#x9;43.0667&#x9;141.3500&#xA;青森県&#x9;40.8244&#x9;140.7400&#xA;岩手県&#x9;39.7036&#x9;141.1527&#xA;宮城県&#x9;38.2682&#x9;140.8694&#xA;秋田県&#x9;39.7186&#x9;140.1024&#xA;山形県&#x9;38.2404&#x9;140.3633&#xA;福島県&#x9;37.7503&#x9;140.4678&#xA;茨城県&#x9;36.3414&#x9;140.4467&#xA;栃木県&#x9;36.5553&#x9;139.8878&#xA;群馬県&#x9;36.3911&#x9;139.0605&#xA;埼玉県&#x9;35.8569&#x9;139.6489&#xA;千葉県&#x9;35.6074&#x9;140.1060&#xA;東京都&#x9;35.6895&#x9;139.6917&#xA;神奈川県&#x9;35.4437&#x9;139.6380&#xA;新潟県&#x9;37.9026&#x9;139.0236&#xA;富山県&#x9;36.6953&#x9;137.2132&#xA;石川県&#x9;36.5613&#x9;136.6562&#xA;福井県&#x9;36.0652&#x9;136.2210&#xA;山梨県&#x9;35.6639&#x9;138.5684&#xA;長野県&#x9;36.6513&#x9;138.1810&#xA;岐阜県&#x9;35.3917&#x9;136.7223&#xA;静岡県&#x9;34.9769&#x9;138.3828&#xA;愛知県&#x9;35.1815&#x9;136.9066&#xA;三重県&#x9;34.7303&#x9;136.5086&#xA;滋賀県&#x9;35.0045&#x9;135.8686&#xA;京都府&#x9;35.0116&#x9;135.7681&#xA;大阪府&#x9;34.6863&#x9;135.5197&#xA;兵庫県&#x9;34.6901&#x9;135.1955&#xA;奈良県&#x9;34.6851&#x9;135.8050&#xA;和歌山県&#x9;34.2260&#x9;135.1675&#xA;鳥取県&#x9;35.5012&#x9;134.2383&#xA;島根県&#x9;35.4676&#x9;133.0505&#xA;岡山県&#x9;34.6618&#x9;133.9344&#xA;広島県&#x9;34.3963&#x9;132.4594&#xA;山口県&#x9;34.1859&#x9;131.4714&#xA;徳島県&#x9;34.0653&#x9;134.5597&#xA;香川県&#x9;34.3428&#x9;134.0469&#xA;愛媛県&#x9;33.8390&#x9;132.7656&#xA;高知県&#x9;33.5597&#x9;133.5311&#xA;福岡県&#x9;33.5902&#x9;130.4017&#xA;佐賀県&#x9;33.2496&#x9;130.2986&#xA;長崎県&#x9;32.7448&#x9;129.8736&#xA;熊本県&#x9;32.7898&#x9;130.7417&#xA;大分県&#x9;33.2382&#x9;131.6126&#xA;宮崎県&#x9;31.9114&#x9;131.4239&#xA;鹿児島県31.5960&#x9;130.5571&#xA;沖縄県&#x9;26.2125&#x9;127.6809" 
+                 VerticalAlignment="Top" 
+                 Width="183" 
+                 Height="159" 
+                 TextChanged="TextBox_TextChanged"
+                 Visibility="Collapsed"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="20,321,0,0" TextWrapping="Wrap" Text="北海道&#x9;43.0667&#x9;141.3500&#xA;青森県&#x9;40.8244&#x9;140.7400&#xA;岩手県&#x9;39.7036&#x9;141.1527&#xA;宮城県&#x9;38.2682&#x9;140.8694&#xA;秋田県&#x9;39.7186&#x9;140.1024&#xA;山形県&#x9;38.2404&#x9;140.3633&#xA;福島県&#x9;37.7503&#x9;140.4678&#xA;茨城県&#x9;36.3414&#x9;140.4467&#xA;栃木県&#x9;36.5553&#x9;139.8878&#xA;群馬県&#x9;36.3911&#x9;139.0605&#xA;埼玉県&#x9;35.8569&#x9;139.6489&#xA;千葉県&#x9;35.6074&#x9;140.1060&#xA;東京都&#x9;35.6895&#x9;139.6917&#xA;神奈川県&#x9;35.4437&#x9;139.6380&#xA;新潟県&#x9;37.9026&#x9;139.0236&#xA;富山県&#x9;36.6953&#x9;137.2132&#xA;石川県&#x9;36.5613&#x9;136.6562&#xA;福井県&#x9;36.0652&#x9;136.2210&#xA;山梨県&#x9;35.6639&#x9;138.5684&#xA;長野県&#x9;36.6513&#x9;138.1810&#xA;岐阜県&#x9;35.3917&#x9;136.7223&#xA;静岡県&#x9;34.9769&#x9;138.3828&#xA;愛知県&#x9;35.1815&#x9;136.9066&#xA;三重県&#x9;34.7303&#x9;136.5086&#xA;滋賀県&#x9;35.0045&#x9;135.8686&#xA;京都府&#x9;35.0116&#x9;135.7681&#xA;大阪府&#x9;34.6863&#x9;135.5197&#xA;兵庫県&#x9;34.6901&#x9;135.1955&#xA;奈良県&#x9;34.6851&#x9;135.8050&#xA;和歌山県&#x9;34.2260&#x9;135.1675&#xA;鳥取県&#x9;35.5012&#x9;134.2383&#xA;島根県&#x9;35.4676&#x9;133.0505&#xA;岡山県&#x9;34.6618&#x9;133.9344&#xA;広島県&#x9;34.3963&#x9;132.4594&#xA;山口県&#x9;34.1859&#x9;131.4714&#xA;徳島県&#x9;34.0653&#x9;134.5597&#xA;香川県&#x9;34.3428&#x9;134.0469&#xA;愛媛県&#x9;33.8390&#x9;132.7656&#xA;高知県&#x9;33.5597&#x9;133.5311&#xA;福岡県&#x9;33.5902&#x9;130.4017&#xA;佐賀県&#x9;33.2496&#x9;130.2986&#xA;長崎県&#x9;32.7448&#x9;129.8736&#xA;熊本県&#x9;32.7898&#x9;130.7417&#xA;大分県&#x9;33.2382&#x9;131.6126&#xA;宮崎県&#x9;31.9114&#x9;131.4239&#xA;鹿児島県&#x9;31.5960&#x9;130.5571&#xA;沖縄県&#x9;26.2125&#x9;127.6809" VerticalAlignment="Top" Width="277" Height="225"/>
     </Grid>
 </Window>
