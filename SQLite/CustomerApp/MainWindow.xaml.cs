@@ -1,137 +1,148 @@
-﻿using Microsoft.Win32;
+﻿using CustomerApp.Data;
+using Microsoft.Win32;
 using SQLite;
-using System.Net;
-using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace CustomerApp;
+namespace CustomerApp {
+    public partial class MainWindow : Window {
+        private List<Customer> _customers = new List<Customer>();
+        public MainWindow() {
+            InitializeComponent();
+            ReadDatabase();
+            CustomerListView.ItemsSource = _customers;
+        }
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window{
-  private List<CarPerson> _persons = new List<CarPerson>();
-    public MainWindow(){
-  
-   // ublic MainWindow() {
+        private string _lastFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
-        InitializeComponent();
-        //ReadDatabase();
-
-
-
-    }
-
-    private void UpdateButton_Click(object sender, RoutedEventArgs e) {
-        var item = PersonListView.SelectedItem as CarPerson;
-        if (item is null) return;
-
-        using (var connection = new SQLiteConnection(App.databasePath)) {
-            connection.CreateTable<CarPerson>();
-
-            var person = new CarPerson() {
-                Id = item.Id,
-                Name = NameTextBox.Text,
-                Phone = PhoneTextBox.Text,
+        private void PhotoButton_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog {
+                InitialDirectory = _lastFolder,
+                Filter = "画像ファイル|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
             };
-           // connection.Update(CarPerson);
+
+            if (openFileDialog.ShowDialog() == true) {
+                string filepath = openFileDialog.FileName;
+                byte[] imageBytes = System.IO.File.ReadAllBytes(filepath);
+
+                var bitmapImage = new BitmapImage();
+                using (var stream = new System.IO.MemoryStream(imageBytes)) {
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.EndInit();
+                }
+
+                ImageBox.Source = bitmapImage;
+            }
         }
-}
 
-    private void SaveButton_Click(object sender, RoutedEventArgs e) {
+        private void SaveButton_Click(object sender, RoutedEventArgs e) {
+            byte[] imageBytes = null;
+            if (ImageBox.Source is BitmapImage bitmapImage) {
+                using (var ms = new System.IO.MemoryStream()) {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(ms);
+                    imageBytes = ms.ToArray();
+                }
+            }
 
-        var person = new CarPerson() {
-            Name = NameTextBox.Text,
-            Phone = PhoneTextBox.Text,
-            Address = AddressTextBox.Text,
-            Picture = ImageToByteArray(Image:(BitmapImage)pictureBox.Source),
-        };
-        using (var connection = new SQLiteConnection(App.databasePath)) {
-            connection.CreateTable<CarPerson>();
-            connection.Insert(person);
-            
+            var customer = new Customer() {
+                Name = NameText.Text,
+                Phone = CallNumberText.Text,
+                Address = AddressText.Text,
+                Picture = imageBytes
+            };
 
-        }
-        ReadDatabase();
-    }
-
-
-    private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-
-        var item = PersonListView.SelectedItem as CarPerson;
-
-        if (item == null) {
-            MessageBox.Show("行を選択して");
-            return;
-        }
             using (var connection = new SQLiteConnection(App.databasePath)) {
-                connection.CreateTable<CarPerson>();
+                connection.CreateTable<Customer>();
+                connection.Insert(customer);
+            }
 
-                connection.Delete(item);   //データベースから選択されているレコードの削除
+            ReadDatabase();
+            CustomerListView.ItemsSource = _customers;
+        }
 
-                ReadDatabase();
+        private void UpDateButton_Click(object sender, RoutedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if (item == null) return;
 
-                PersonListView.ItemsSource = _persons;
+            byte[] imageBytes = null;
+            if (ImageBox.Source is BitmapImage bitmapImage) {
+                using (var ms = new System.IO.MemoryStream()) {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(ms);
+                    imageBytes = ms.ToArray();
+                }
+            }
+
+            item.Name = NameText.Text;
+            item.Phone = CallNumberText.Text;
+            item.Address = AddressText.Text;
+            item.Picture = imageBytes;
+
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Customer>();
+                connection.Update(item);
+            }
+
+            ReadDatabase();
+            CustomerListView.ItemsSource = _customers;
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if (item == null) {
+                MessageBox.Show("行を選択してください");
+                return;
+            }
+
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Customer>();
+                connection.Delete(item);
+            }
+
+            ReadDatabase();
+            CustomerListView.ItemsSource = _customers;
+        }
+
+        private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if (item == null) return;
+
+            NameText.Text = item.Name;
+            CallNumberText.Text = item.Phone;
+            AddressText.Text = item.Address;
+            ImageBox.Source = item.PictureImage;
+        }
+
+        private void SerchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            if (SerchTextBox.Text == "名前で検索") return;
+            var search = _customers.Where(s => s.Name.Contains(SerchTextBox.Text));
+            CustomerListView.ItemsSource = search;
+        }
+
+        // TextBoxヒント表示用
+        private void SerchTextBox_GotFocus(object sender, RoutedEventArgs e) {
+            if (SerchTextBox.Text == "名前で検索")
+                SerchTextBox.Text = "";
+        }
+
+        private void SerchTextBox_LostFocus(object sender, RoutedEventArgs e) {
+            if (string.IsNullOrWhiteSpace(SerchTextBox.Text))
+                SerchTextBox.Text = "名前で検索";
+        }
+
+        private void ReadDatabase() {
+            using (var connection = new SQLiteConnection(App.databasePath)) {
+                connection.CreateTable<Customer>();
+                _customers = connection.Table<Customer>().ToList();
             }
         }
     }
-    private void PersonListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-
-        var item = PersonListView.SelectedItem as CarPerson;
-        if (item is null) return;
-        NameTextBox.Text = item.Name;
-        PhoneTextBox.Text = item.Phone;
-    }
-
-   
-
-    private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-        var query = SearchTextBox.Text.ToLower();
-
-        // 名前 電話番号 住所 検索
-        var filteredList = _persons.Where(p =>
-            p.Name.ToLower().Contains(query) ||
-            p.Phone.ToLower().Contains(query) ||
-            p.Address.ToLower().Contains(query)
-        ).ToList();
-
-        // フィルタリングされたリストを表示
-        PersonListView.ItemsSource = filteredList;
-  
-    }
-
-    private void Image_Click(object sender, RoutedEventArgs e) {
-
-
-        var dialog = new Microsoft.Win32.OpenFileDialog {
-            Title = "画像を選択してください",
-            Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp"
-        };
-
-        // ファイルが選択されたら
-        if (dialog.ShowDialog() == true) {
-            // 選択した画像ファイルを BitmapImage に読み込む
-            var bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.CacheOption = BitmapCacheOption.OnLoad;
-            bitmap.UriSource = new Uri(dialog.FileName);
-            bitmap.EndInit();
-
-            // Image コントロールに表示
-            picture.Source = bitmap;
-
-            // もし後でDBに保存する場合、画像を保持しておく
-            // _selectedImage = bitmap;
-
-
-        } }
 }

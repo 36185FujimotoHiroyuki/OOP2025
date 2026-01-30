@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace CustomerApp{
 
@@ -22,6 +23,23 @@ namespace CustomerApp{
 
         // 画像データ
         public byte[] Picture { get; set; }
+
+
+        [Ignore]
+        public BitmapImage PictureImage {
+            get {
+                if (Picture == null) return null;
+                var image = new BitmapImage();
+                using (var stream = new System.IO.MemoryStream(Picture)) {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = stream;
+                    image.EndInit();
+                }
+                return image;
+            }
+        }
+
 
     }
 }

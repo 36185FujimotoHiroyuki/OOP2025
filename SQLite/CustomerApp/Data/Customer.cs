@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
-namespace CustomerApp.Data
-{
-    internal class Customer {
-        [PrimaryKey,AutoIncrement]
+namespace CustomerApp.Data {
+    class Customer {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         /// <summary>
         /// 名前
         /// </summary>
-
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// 電話番号
@@ -26,6 +25,21 @@ namespace CustomerApp.Data
         /// <summary>
         /// 画像
         /// </summary>
-        public byte[] Picture { get; set; } 
+        public byte[] Picture { get; set; }
+
+        [Ignore]//参考
+        public BitmapImage PictureImage {
+            get {
+                if (Picture == null) return null;
+                var image = new BitmapImage();
+                using (var stream = new System.IO.MemoryStream(Picture)) {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = stream;
+                    image.EndInit();
+                }
+                return image;
+            }
+        }
     }
 }
